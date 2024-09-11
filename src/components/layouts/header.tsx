@@ -2,7 +2,7 @@ import { SiteConfig } from '@/lib/site-config';
 import Link from 'next/link';
 import { ThemeToggle } from '../theme-toggle';
 import { Typography } from '../typography';
-import ConnectionButton from '../connection-button';
+import AuthButton from '@/features/auth/AuthButton';
 
 export async function Header() {
   return (
@@ -19,8 +19,8 @@ export async function Header() {
         </div>
         <div className='flex flex-1 items-center justify-end space-x-4'>
           <nav className='flex items-center space-x-1'>
+            <AuthButton />
             <ThemeToggle />
-            <ConnectionButton />
           </nav>
         </div>
       </div>
