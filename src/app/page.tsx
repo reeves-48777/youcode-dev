@@ -17,9 +17,7 @@ export default async function Home() {
         <CardDescription>On teste si la connexion se fait bien</CardDescription>
       </CardHeader>
       <CardContent>
-        <Suspense fallback={'Loading...'}>
-          <pre>{JSON.stringify(session, null, 2)}</pre>
-        </Suspense>
+        <pre>{JSON.stringify(session, null, 2)}</pre>
       </CardContent>
     </Card>
   );

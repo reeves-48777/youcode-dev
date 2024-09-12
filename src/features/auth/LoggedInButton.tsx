@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { Session } from 'next-auth';
 import {
@@ -20,8 +21,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useMutation } from '@tanstack/react-query';
 import { signOut } from 'next-auth/react';
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import Loader from '@/components/ui/loader';
+
+import Link from 'next/link';
 
 type LoggedInButtonProps = {
   user: Session['user'];
@@ -54,16 +57,22 @@ export default function LoggedInButton(props: LoggedInButtonProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          <DropdownMenuItem asChild>
+            <Link
+              href='/account'
+              className='flex gap-2'
+            >
+              <User size={12} />
+              Account
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem>
-              <Button
-                variant='ghost'
-                size='sm'
-                className='flex gap-4'
-              >
+            <DropdownMenuItem asChild>
+              <div className='flex gap-2'>
                 <LogOut size={12} />
                 Log out
-              </Button>
+              </div>
             </DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
