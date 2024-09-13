@@ -6,9 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import LogoutButton from '@/features/auth/LogoutButton';
 import { getAuthSession } from '@/lib/auth';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { AvatarFallback } from '@radix-ui/react-avatar';
+import Link from 'next/link';
 
 export default async function Account() {
   const session = await getAuthSession();
@@ -18,42 +21,37 @@ export default async function Account() {
   }
 
   return (
-    <div className='flex items-center justify-center'>
-      <Card>
-        <CardHeader>
-          <CardTitle>My account</CardTitle>
-          <CardDescription>View you profile informations</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className='flex flex-col text-sm gap-3'>
-            <label>
-              Name
-              <p>{session.user.name}</p>
-            </label>
-            <label>
-              Email
-              <p className='text-muted-foreground'>{session.user.email}</p>
-            </label>
-          </div>
-          <div className='mt-2 flex items-center justify-end w-full'>
-            <LogoutButton />
-          </div>
-        </CardContent>
-        <CardFooter className='flex justify-between'>
-          <Button
-            variant='outline'
-            size='sm'
-          >
-            Admin
-          </Button>
-          <Button
-            variant='ghost'
-            size='sm'
-          >
-            Modifier le profil
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
+    <Card className='max-w-lg m-auto mt-4'>
+      <CardHeader className='flex items-center flex-row gap-4 space-y-0'>
+        <Avatar>
+          <AvatarFallback>{session.user.email?.[0]}</AvatarFallback>
+          <AvatarImage
+            src={session.user.image!}
+            alt='user image'
+          />
+        </Avatar>
+        <div className='space-y-1'>
+          <CardTitle>{session.user.email}</CardTitle>
+          <CardDescription>{session.user.name}</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className='flex flex-col gap-2'>
+        <Link
+          className={buttonVariants({ variant: 'outline', size: 'lg' })}
+          href='/account/settings'
+        >
+          Settings
+        </Link>
+        <Link
+          className={buttonVariants({ variant: 'outline', size: 'lg' })}
+          href='/admin'
+        >
+          Admin
+        </Link>
+      </CardContent>
+      <CardFooter className='flex flex-row-reverse'>
+        <LogoutButton />
+      </CardFooter>
+    </Card>
   );
 }
