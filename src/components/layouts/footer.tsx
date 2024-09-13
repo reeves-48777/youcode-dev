@@ -1,7 +1,7 @@
-import { SiteConfig } from '@/lib/site-config';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '../typography';
+import { SiteConfig } from '@/lib/site-config';
 
 export function Footer() {
   return (
@@ -9,19 +9,13 @@ export function Footer() {
       <div className='m-auto w-full max-w-3xl px-2 py-4'>
         <div className='flex flex-col lg:flex-row lg:items-start lg:jusitfy-between'>
           <div className='flex flex-row items-center gap-2'>
-            <Image
-              src='/images/you-code.svg'
-              width={40}
-              height={30}
-              alt='app logo'
-            />
-            <Typography
-              variant='base'
-              as={Link}
-              href='/'
-            >
-              {SiteConfig.title}
-            </Typography>
+            <Link href='/'>
+              <img
+                width={160}
+                src='/images/logo-text.png'
+                alt='app logo'
+              />
+            </Link>
           </div>
           <div className='flex flex-col items-end gap-2 text-sm text-muted-foreground'>
             <Link
@@ -55,7 +49,7 @@ export function Footer() {
             variant='base'
             className='text-xs text-muted-foreground'
           >
-            &copy; {new Date().getFullYear()} YouCode
+            &copy; {new Date().getFullYear()} {SiteConfig.title}
           </Typography>
         </div>
       </div>
